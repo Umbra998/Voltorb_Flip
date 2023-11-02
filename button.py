@@ -9,23 +9,32 @@ class Button:
         self.rect.x = button_x
         self.rect.y = button_y
         self.clicked = False
+        self.hiding = False
+
+    def move(self, new_x, new_y):
+        self.rect.x = new_x
+        self.rect.y = new_y
 
     def draw(self):
         action = False
+        if self.hiding is False:
 
-        # get mouse position
-        mouse_pos = pygame.mouse.get_pos()
+            # get mouse position
+            mouse_pos = pygame.mouse.get_pos()
 
-        # check mouseover and clicked conditions
-        if self.rect.collidepoint(mouse_pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked is False:
-                action = True
-                self.clicked = True
+            # check mouseover and clicked conditions
+            if self.rect.collidepoint(mouse_pos):
+                if pygame.mouse.get_pressed()[0] == 1 and self.clicked is False:
+                    action = True
+                    self.clicked = True
 
-        if pygame.mouse.get_pressed()[0] == 0:
-            self.clicked = False
+            if pygame.mouse.get_pressed()[0] == 0:
+                self.clicked = False
 
-        # draw button
-        SCREEN.blit(self.image, (self.rect.x, self.rect.y))
+            # draw button
+            SCREEN.blit(self.image, (self.rect.x, self.rect.y))
 
         return action
+
+    def reset(self):
+        self.hiding = False

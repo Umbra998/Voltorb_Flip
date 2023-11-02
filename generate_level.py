@@ -4,37 +4,37 @@ from settings import *
 
 
 def generate_level(self):
-    print("Level generated!")
-    if self.level == 1:
-        # put bombs
-        for bomb in range(self.bombs):
-            if self.bombs == self.bombs_set:
-                break
-            coordinates = generate_coordinates(self)
-            x = coordinates[0]
-            y = coordinates[1]
-            self.grid[x][y] = 0
-            self.bombs_set += 1
-        # put numbers 2 and 3
-        for num in range(self.max_twos+self.max_threes):
-            if self.twos_set == self.max_twos and self.threes_set == self.max_threes:
-                break
-            coordinates = generate_coordinates(self)
-            x = coordinates[0]
-            y = coordinates[1]
-            update_max_level_one(self)
-            z = random.randint(2, 3)
-            if z == 2 and self.twos_set < self.max_twos:
-                self.grid[x][y] = 2
-                self.twos_set += 1
-            elif z == 3 and self.threes_set < self.max_twos:
-                self.grid[x][y] = 3
-                self.threes_set += 1
+    # level
+    set_level_restrictions(self)
+    # put bombs
+    for bomb in range(self.bombs):
+        if self.bombs == self.bombs_set:
+            break
+        coordinates = generate_coordinates(self)
+        x = coordinates[0]
+        y = coordinates[1]
+        self.grid[x][y] = 0
+        self.bombs_set += 1
+    # put numbers 2 and 3
+    z = random.randint(0, self.max_threes)
+    self.max_threes = z
+    update_max_level(self)
+    for twos in range(self.max_twos):
+        coordinates = generate_coordinates(self)
+        x = coordinates[0]
+        y = coordinates[1]
+        self.grid[x][y] = 2
+    for threes in range(self.max_threes):
+        coordinates = generate_coordinates(self)
+        x = coordinates[0]
+        y = coordinates[1]
+        self.grid[x][y] = 3
+    # put number 1s
     for num_x in range(5):
         for num_y in range(5):
             if self.grid[num_x][num_y] == -1:
                 self.grid[num_x][num_y] = 1
-    print(self.grid)
+    # update row and column grid
     for row in range(5):
         for column in range(5):
             if self.grid[row][column] == 0:
@@ -43,23 +43,73 @@ def generate_level(self):
             else:
                 self.grid_row[column][1] += self.grid[row][column]
                 self.grid_column[row][1] += self.grid[row][column]
-    print(self.grid_row)
-    print(self.grid_column)
+    print("Level generated!")
 
 
-def update_max_level_one(self):
-    if self.twos_set == 1:
-        self.max_threes = 2
-    elif self.twos_set == 3:
-        self.max_threes = 1
-    elif self.twos_set == 4:
-        self.max_threes = 0
-    if self.threes_set == 1:
-        self.max_twos = 3
-    elif self.threes_set == 2:
-        self.max_twos = 2
-    elif self.threes_set == 3:
-        self.max_twos = 0
+def set_level_restrictions(self):
+    if self.level == 1:
+        self.bombs = 6
+        self.max_twos = 5
+        self.max_threes = 3
+    elif self.level == 2:
+        self.bombs = 7
+        self.max_twos = 6
+        self.max_threes = 4
+    elif self.level == 3:
+        self.bombs = 8
+        self.max_twos = 7
+        self.max_threes = 4
+    elif self.level == 4:
+        self.bombs = 9
+        self.max_twos = 8
+        self.max_threes = 5
+
+
+def update_max_level(self):
+    if self.level == 1:
+        if self.max_threes == 0:
+            self.max_twos = 5
+        elif self.max_threes == 1:
+            self.max_twos = 3
+        elif self.max_threes == 2:
+            self.max_twos = 2
+        elif self.max_threes == 3:
+            self.max_twos = 0
+    if self.level == 2:
+        if self.max_threes == 0:
+            self.max_twos = 6
+        if self.max_threes == 1:
+            self.max_twos = 5
+        if self.max_threes == 2:
+            self.max_twos = 3
+        if self.max_threes == 3:
+            self.max_twos = 1
+        if self.max_threes == 4:
+            self.max_twos = 0
+    if self.level == 3:
+        if self.max_threes == 0:
+            self.max_twos = 6
+        if self.max_threes == 1:
+            self.max_twos = 6
+        if self.max_threes == 2:
+            self.max_twos = 4
+        if self.max_threes == 3:
+            self.max_twos = 2
+        if self.max_threes == 4:
+            self.max_twos = 0
+    if self.level == 4:
+        if self.max_threes == 0:
+            self.max_twos = 8
+        if self.max_threes == 1:
+            self.max_twos = 7
+        if self.max_threes == 2:
+            self.max_twos = 5
+        if self.max_threes == 3:
+            self.max_twos = 3
+        if self.max_threes == 4:
+            self.max_twos = 2
+        if self.max_threes == 5:
+            self.max_twos = 0
 
 
 def generate_coordinates(self):

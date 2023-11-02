@@ -1,16 +1,18 @@
 import pygame
 pygame.init()
 
-SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT) = (800, 800)
+SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT) = (900, 800)
 TILE_SIZE = (TILE_WIDTH, TILE_HEIGHT) = (SCREEN_WIDTH//6, SCREEN_HEIGHT//6)
+MARGIN = TILE_WIDTH
 # variables
 SQUARE = 5
-level_number = 1
+game_state = 0
 # def font
-FONT_GAME_STATUS = pygame.font.SysFont('Bauhaus 93', 40)
-FONT_SCORE = pygame.font.SysFont('Bauhaus 93', 30)
+FONT_GAME_STATUS = pygame.font.SysFont('Bauhaus 93', TILE_WIDTH//4)
+FONT_SCORE = pygame.font.SysFont('Bauhaus 93', int(TILE_HEIGHT/1.5))
+FONT_LEVEL = pygame.font.SysFont('Bauhaus 93', int(TILE_HEIGHT/2))
 # set window size
-SCREEN = pygame.display.set_mode(SIZE)
+SCREEN = pygame.display.set_mode((SCREEN_WIDTH + MARGIN, SCREEN_HEIGHT))
 # set title
 pygame.display.set_caption("Voltorb Flip")
 # enable clock (fps)
