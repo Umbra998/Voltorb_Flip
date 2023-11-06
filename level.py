@@ -25,8 +25,6 @@ class Level:
         self.grid_column = grid_column
         self.max_twos = 0
         self.max_threes = 0
-        self.twos_set = 0
-        self.threes_set = 0
         self.bombs = 6
         self.bombs_set = 0
         self.empty = True
@@ -66,8 +64,6 @@ class Level:
                 self.grid_row[row][col] = 0
                 self.grid_column[row][col] = 0
         # self.level = 1
-        self.twos_set = 0
-        self.threes_set = 0
         self.max_twos = -1
         self.max_threes = -1
         self.bombs_set = 0

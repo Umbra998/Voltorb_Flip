@@ -4,7 +4,6 @@ from button import Button
 from draw_grid import draw_bomb_image, draw_one_image, draw_two_image, draw_three_image
 
 # grid buttons
-question_mark_img = pygame.image.load("img/Buttons/question_mark.png")
 question_mark_img = pygame.transform.scale(question_mark_img, (TILE_WIDTH, TILE_HEIGHT))
 null_null_button = Button(0, 0, question_mark_img)
 null_one_button = Button(TILE_WIDTH, 0, question_mark_img)

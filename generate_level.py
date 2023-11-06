@@ -43,7 +43,6 @@ def generate_level(self):
             else:
                 self.grid_row[column][1] += self.grid[row][column]
                 self.grid_column[row][1] += self.grid[row][column]
-    print("Level generated!")
 
 
 def set_level_restrictions(self):
@@ -63,6 +62,18 @@ def set_level_restrictions(self):
         self.bombs = 9
         self.max_twos = 8
         self.max_threes = 5
+    elif self.level == 5:
+        self.bombs = 10
+        self.max_twos = 9
+        self.max_threes = 5
+    elif self.level == 6:
+        self.bombs = 10
+        self.max_twos = 8
+        self.max_threes = 6
+    elif self.level == 7:
+        self.bombs = 10
+        self.max_twos = 9
+        self.max_threes = 6
 
 
 def update_max_level(self):
@@ -101,7 +112,8 @@ def update_max_level(self):
         if self.max_threes == 0:
             self.max_twos = 8
         if self.max_threes == 1:
-            self.max_twos = 7
+            self.max_threes = 2
+            self.max_twos = 5
         if self.max_threes == 2:
             self.max_twos = 5
         if self.max_threes == 3:
@@ -110,6 +122,51 @@ def update_max_level(self):
             self.max_twos = 2
         if self.max_threes == 5:
             self.max_twos = 0
+    if self.level == 5:
+        if self.max_threes == 0:
+            self.max_twos = 9
+        if self.max_threes == 1:
+            self.max_twos = 7
+        if self.max_threes == 2:
+            self.max_twos = 6
+        if self.max_threes == 3:
+            self.max_twos = 4
+        if self.max_threes == 4:
+            self.max_threes = 3
+            self.max_twos = 4
+        if self.max_threes == 5:
+            self.max_twos = 1
+    if self.level == 6:
+        if self.max_threes == 0:
+            self.max_threes = 1
+        if self.max_threes == 1:
+            self.max_twos = 8
+        if self.max_threes == 2:
+            self.max_threes = 3
+        if self.max_threes == 3:
+            self.max_twos = 5
+        if self.max_threes == 4:
+            self.max_twos = 3
+        if self.max_threes == 5:
+            self.max_twos = 2
+        if self.max_threes == 6:
+            self.max_twos = 2
+            self.max_threes = 5
+    if self.level == 7:
+        if self.max_threes == 0:
+            self.max_threes = 1
+        if self.max_threes == 1:
+            self.max_twos = 9
+        if self.max_threes == 2:
+            self.max_twos = 7
+        if self.max_threes == 3:
+            self.max_twos = 6
+        if self.max_threes == 4:
+            self.max_twos = 4
+        if self.max_threes == 5:
+            self.max_threes = 6
+        if self.max_threes == 6:
+            self.max_twos = 1
 
 
 def generate_coordinates(self):

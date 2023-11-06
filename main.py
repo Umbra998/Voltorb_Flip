@@ -1,3 +1,5 @@
+import random
+
 import pygame
 from settings import *
 from level import Level
@@ -6,20 +8,12 @@ from button import Button
 from text import draw_text
 from grid_buttons import GridButtons
 from fade import fade
-from display_text import draw_grid_text, draw_level_text
+from display_text import draw_grid_text, draw_level_text, draw_score_text
 pygame.init()
 
 # init level and grid
 level = Level(1)
 grid = GridButtons()
-
-# button images
-start_image = pygame.image.load("img/Buttons/start.png")
-start_image = pygame.transform.scale(start_image, (TILE_WIDTH, TILE_HEIGHT//2))
-restart_image = pygame.image.load("img/Buttons/restart.png")
-restart_image = pygame.transform.scale(restart_image, (TILE_WIDTH, TILE_HEIGHT//2))
-continue_image = pygame.image.load("img/Buttons/continue.png")
-continue_image = pygame.transform.scale(continue_image, (TILE_WIDTH, TILE_HEIGHT//2))
 
 # button
 start_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//2,
@@ -31,11 +25,12 @@ continue_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//2,
 
 
 # main loop
-def main(state, running):
+def main(state, game_score, running):
 
     while running:
         SCREEN.fill('dimgray')
         draw_level_text(level)
+        draw_score_text(game_score)
         if state == 1:
             draw_grid()
             grid.update(level)
@@ -54,6 +49,7 @@ def main(state, running):
             fade(SCREEN_WIDTH, SCREEN_HEIGHT)
             level.reset()
             grid.reset()
+            game_score = 0
             state = 0
             level.level = 1
 
@@ -63,7 +59,8 @@ def main(state, running):
             grid.reveal()
             grid.update_images(level)
             if continue_button.draw():
-                level.level = level.level//2
+                x = random.randint(0, (level.level - 1))
+                level.level -= x
                 state = 3
 
         if state == 3:
@@ -78,8 +75,12 @@ def main(state, running):
             grid.reveal()
             grid.update_images(level)
             if continue_button.draw():
-                if level.level != 4:
+                if level.level != 7:
                     level.level += 1
+                if game_score < 50000:
+                    game_score += level.score
+                    if game_score > 50000:
+                        game_score = 50000
                 state = 3
 
         for event in pygame.event.get():
@@ -91,6 +92,6 @@ def main(state, running):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    main(game_state, running=True)
+    main(game_state, score, running=True)
 
 pygame.quit()
