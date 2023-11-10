@@ -6,15 +6,6 @@ from settings import *
 def generate_level(self):
     # level
     set_level_restrictions(self)
-    # put bombs
-    for bomb in range(self.bombs):
-        if self.bombs == self.bombs_set:
-            break
-        coordinates = generate_coordinates(self)
-        x = coordinates[0]
-        y = coordinates[1]
-        self.grid[x][y] = 0
-        self.bombs_set += 1
     # put numbers 2 and 3
     z = random.randint(0, self.max_threes)
     self.max_threes = z
@@ -29,6 +20,15 @@ def generate_level(self):
         x = coordinates[0]
         y = coordinates[1]
         self.grid[x][y] = 3
+    # put bombs
+    for bomb in range(self.bombs):
+        if self.bombs == self.bombs_set:
+            break
+        coordinates = generate_coordinates(self)
+        x = coordinates[0]
+        y = coordinates[1]
+        self.grid[x][y] = 0
+        self.bombs_set += 1
     # put number 1s
     for num_x in range(5):
         for num_y in range(5):
@@ -59,7 +59,7 @@ def set_level_restrictions(self):
         self.max_twos = 7
         self.max_threes = 4
     elif self.level == 4:
-        self.bombs = 9
+        self.bombs = 10
         self.max_twos = 8
         self.max_threes = 5
     elif self.level == 5:
@@ -74,6 +74,10 @@ def set_level_restrictions(self):
         self.bombs = 10
         self.max_twos = 9
         self.max_threes = 6
+    elif self.level == 8:
+        self.bombs = 10
+        self.max_twos = 8
+        self.max_threes = 7
 
 
 def update_max_level(self):
@@ -118,10 +122,12 @@ def update_max_level(self):
             self.max_twos = 5
         if self.max_threes == 3:
             self.max_twos = 3
+            self.bombs = 8
         if self.max_threes == 4:
             self.max_twos = 2
         if self.max_threes == 5:
             self.max_twos = 0
+            self.bombs = 8
     if self.level == 5:
         if self.max_threes == 0:
             self.max_twos = 9
@@ -157,6 +163,7 @@ def update_max_level(self):
             self.max_threes = 1
         if self.max_threes == 1:
             self.max_twos = 9
+            self.bombs = 13
         if self.max_threes == 2:
             self.max_twos = 7
         if self.max_threes == 3:
@@ -167,6 +174,24 @@ def update_max_level(self):
             self.max_threes = 6
         if self.max_threes == 6:
             self.max_twos = 1
+            self.bombs = 13
+    if self.level == 8:
+        if self.max_threes == 0:
+            self.max_threes = 7
+        if self.max_threes == 1:
+            self.max_threes = 2
+        if self.max_threes == 2:
+            self.max_twos = 8
+        if self.max_threes == 3:
+            self.max_twos = 7
+        if self.max_threes == 4:
+            self.max_twos = 5
+        if self.max_threes == 5:
+            self.max_threes = 6
+        if self.max_threes == 6:
+            self.max_twos = 2
+        if self.max_threes == 7:
+            self.max_twos = 0
 
 
 def generate_coordinates(self):

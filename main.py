@@ -25,7 +25,7 @@ continue_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//2,
 
 # main loop
 def main(state, game_score, running):
-
+    no_failure_in_row = 0
     create_buttons()
 
     while running:
@@ -48,6 +48,7 @@ def main(state, game_score, running):
 
         if state == 1 and restart_button.draw():
             fade(SCREEN_WIDTH, SCREEN_HEIGHT)
+            no_failure_in_row = 0
             level.reset()
             reset_buttons()
             game_score = 0
@@ -60,8 +61,12 @@ def main(state, game_score, running):
             reveal_buttons()
             update_button_images(level)
             if continue_button.draw():
-                x = random.randint(0, (level.level - 1))
+                if level.level == 8:
+                    x = random.randint(1, (level.level - 1))
+                else:
+                    x = random.randint(0, (level.level - 1))
                 level.level -= x
+                no_failure_in_row = 0
                 state = 3
 
         if state == 3:
@@ -76,8 +81,13 @@ def main(state, game_score, running):
             reveal_buttons()
             update_button_images(level)
             if continue_button.draw():
-                if level.level != 7:
+                if level.level < 7:
                     level.level += 1
+                    no_failure_in_row += 1
+                elif no_failure_in_row >= 5:
+                    level.level = 8
+                else:
+                    level.level = 7
                 if game_score < 50000:
                     game_score += level.score
                     if game_score > 50000:
