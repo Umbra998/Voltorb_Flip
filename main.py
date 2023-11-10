@@ -6,14 +6,13 @@ from level import Level
 from draw_grid import draw_grid
 from button import Button
 from text import draw_text
-from grid_buttons import GridButtons
+from grid_buttons import create_buttons, update_buttons, reveal_buttons, reset_buttons, update_button_images
 from fade import fade
 from display_text import draw_grid_text, draw_level_text, draw_score_text
 pygame.init()
 
 # init level and grid
 level = Level(1)
-grid = GridButtons()
 
 # button
 start_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//2,
@@ -27,13 +26,15 @@ continue_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//2,
 # main loop
 def main(state, game_score, running):
 
+    create_buttons()
+
     while running:
         SCREEN.fill('dimgray')
         draw_level_text(level)
         draw_score_text(game_score)
         if state == 1:
             draw_grid()
-            grid.update(level)
+            update_buttons(level)
             draw_grid_text(level)
             game_completion = level.check_for_clear()
             if game_completion == 0:
@@ -48,7 +49,7 @@ def main(state, game_score, running):
         if state == 1 and restart_button.draw():
             fade(SCREEN_WIDTH, SCREEN_HEIGHT)
             level.reset()
-            grid.reset()
+            reset_buttons()
             game_score = 0
             state = 0
             level.level = 1
@@ -56,8 +57,8 @@ def main(state, game_score, running):
         if state == 2:
             draw_grid()
             draw_grid_text(level)
-            grid.reveal()
-            grid.update_images(level)
+            reveal_buttons()
+            update_button_images(level)
             if continue_button.draw():
                 x = random.randint(0, (level.level - 1))
                 level.level -= x
@@ -66,14 +67,14 @@ def main(state, game_score, running):
         if state == 3:
             fade(SCREEN_WIDTH, SCREEN_HEIGHT)
             level.reset()
-            grid.reset()
+            reset_buttons()
             state = 0
 
         if state == 4:
             draw_grid()
             draw_grid_text(level)
-            grid.reveal()
-            grid.update_images(level)
+            reveal_buttons()
+            update_button_images(level)
             if continue_button.draw():
                 if level.level != 7:
                     level.level += 1
