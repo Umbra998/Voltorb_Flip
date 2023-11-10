@@ -21,25 +21,38 @@ def draw_grid():
     pygame.draw.line(SCREEN, 'black', (0, TILE_HEIGHT*5), (SCREEN_WIDTH, TILE_HEIGHT*5))
 
 
-def draw_bomb_image(x, y):
-    bomb_img = pygame.image.load("img/Buttons/bomb.png")
-    bomb_img = pygame.transform.scale(bomb_img, (TILE_WIDTH, TILE_HEIGHT))
-    SCREEN.blit(bomb_img, (x, y))
+def draw_bomb_image(x, y, state, img):
+    if state == 1:
+        img = pygame.transform.scale(img, (TILE_WIDTH, TILE_HEIGHT))
+    elif state == 2:
+        img = pygame.transform.scale(img, (TILE_WIDTH//2, TILE_HEIGHT//2))
+    SCREEN.blit(img, (x, y))
 
 
-def draw_one_image(x, y):
-    num_one_img = pygame.image.load("img/Buttons/num_one.png")
-    num_one_img = pygame.transform.scale(num_one_img, (TILE_WIDTH, TILE_HEIGHT))
-    SCREEN.blit(num_one_img, (x, y))
+def draw_one_image(x, y, state, img):
+    if state == 1:
+        img = pygame.transform.scale(img, (TILE_WIDTH, TILE_HEIGHT))
+    elif state == 2:
+        img = pygame.transform.scale(img, (TILE_WIDTH//2, TILE_HEIGHT//2))
+    SCREEN.blit(img, (x, y))
 
 
-def draw_two_image(x, y):
-    num_two_img = pygame.image.load("img/Buttons/num_two.png")
-    num_two_img = pygame.transform.scale(num_two_img, (TILE_WIDTH, TILE_HEIGHT))
-    SCREEN.blit(num_two_img, (x, y))
+def draw_two_image(x, y, state, img):
+    if state == 1:
+        img = pygame.transform.scale(img, (TILE_WIDTH, TILE_HEIGHT))
+    elif state == 2:
+        img = pygame.transform.scale(img, (TILE_WIDTH//2, TILE_HEIGHT//2))
+    SCREEN.blit(img, (x, y))
 
 
-def draw_three_image(x, y):
-    num_three_img = pygame.image.load("img/Buttons/num_three.png")
-    num_three_img = pygame.transform.scale(num_three_img, (TILE_WIDTH, TILE_HEIGHT))
-    SCREEN.blit(num_three_img, (x, y))
+def draw_three_image(x, y, state, img):
+    if state == 1:
+        img = pygame.transform.scale(img, (TILE_WIDTH, TILE_HEIGHT))
+    elif state == 2:
+        img = pygame.transform.scale(img, (TILE_WIDTH//2, TILE_HEIGHT//2))
+    SCREEN.blit(img, (x, y))
+
+
+def draw_question_mark_image(x, y, img):
+    pygame.transform.scale(img, (TILE_WIDTH, TILE_HEIGHT))
+    SCREEN.blit(img, (x, y))

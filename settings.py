@@ -15,7 +15,13 @@ restart_image = pygame.image.load("img/Buttons/restart.png")
 restart_image = pygame.transform.scale(restart_image, (TILE_WIDTH, TILE_HEIGHT//2))
 continue_image = pygame.image.load("img/Buttons/continue.png")
 continue_image = pygame.transform.scale(continue_image, (TILE_WIDTH, TILE_HEIGHT//2))
+edit_image = pygame.image.load("img/Buttons/edit.png")
+edit_image = pygame.transform.scale(edit_image, (TILE_WIDTH, TILE_HEIGHT//2))
 question_mark_img = pygame.image.load("img/Buttons/question_mark.png")
+bomb_image = pygame.image.load("img/Buttons/bomb.png")
+num_one_image = pygame.image.load("img/Buttons/num_one.png")
+num_two_image = pygame.image.load("img/Buttons/num_two.png")
+num_three_image = pygame.image.load("img/Buttons/num_three.png")
 
 # def font
 FONT_GAME_STATUS = pygame.font.SysFont('Bauhaus 93', TILE_WIDTH//4)

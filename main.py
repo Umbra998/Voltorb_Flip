@@ -7,6 +7,7 @@ from draw_grid import draw_grid
 from button import Button
 from text import draw_text
 from grid_buttons import create_buttons, update_buttons, reveal_buttons, reset_buttons, update_button_images
+from edit_images import create_edits, update_edit_images, draw_images, clear_images
 from fade import fade
 from display_text import draw_grid_text, draw_level_text, draw_score_text
 pygame.init()
@@ -21,12 +22,31 @@ restart_button = Button(SCREEN_WIDTH, TILE_HEIGHT * 5 + TILE_HEIGHT//4,
                         restart_image)
 continue_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//2,
                          continue_image)
+edit_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//3,
+                     edit_image)
+img = pygame.transform.scale(bomb_image, (TILE_WIDTH//2, TILE_HEIGHT//2))
+bomb_button = Button(SCREEN_WIDTH, TILE_HEIGHT * 3,
+                     img)
+img = pygame.transform.scale(bomb_image, (TILE_WIDTH, TILE_HEIGHT))
+bomb_button_full = Button(SCREEN_WIDTH, SCREEN_HEIGHT - TILE_HEIGHT * 2,
+                          img)
+img = pygame.transform.scale(num_one_image, (TILE_WIDTH//2, TILE_HEIGHT//2))
+one_button = Button(SCREEN_WIDTH + TILE_WIDTH//2, TILE_HEIGHT * 3,
+                    img)
+img = pygame.transform.scale(num_two_image, (TILE_WIDTH//2, TILE_HEIGHT//2))
+two_button = Button(SCREEN_WIDTH, TILE_HEIGHT * 3 + TILE_HEIGHT // 2,
+                    img)
+img = pygame.transform.scale(num_three_image, (TILE_WIDTH//2, TILE_HEIGHT//2))
+three_button = Button(SCREEN_WIDTH + TILE_WIDTH // 2, TILE_HEIGHT * 3 + TILE_HEIGHT//2,
+                      img)
 
 
 # main loop
 def main(state, game_score, running):
     no_failure_in_row = 0
+    edit_num = -1
     create_buttons()
+    create_edits()
 
     while running:
         SCREEN.fill('dimgray')
@@ -35,25 +55,27 @@ def main(state, game_score, running):
         if state == 1:
             draw_grid()
             update_buttons(level)
+            draw_images(level)
             draw_grid_text(level)
             game_completion = level.check_for_clear()
             if game_completion == 0:
                 state = 2
             if game_completion == 1:
                 state = 4
+            if restart_button.draw():
+                fade(SCREEN_WIDTH, SCREEN_HEIGHT)
+                no_failure_in_row = 0
+                level.reset()
+                reset_buttons()
+                game_score = 0
+                state = 0
+                level.level = 1
+            if edit_button.draw():
+                state = 5
 
         if state == 0 and start_button.draw():
             level.set_bombs_and_numbers()
             state = 1
-
-        if state == 1 and restart_button.draw():
-            fade(SCREEN_WIDTH, SCREEN_HEIGHT)
-            no_failure_in_row = 0
-            level.reset()
-            reset_buttons()
-            game_score = 0
-            state = 0
-            level.level = 1
 
         if state == 2:
             draw_grid()
@@ -73,6 +95,7 @@ def main(state, game_score, running):
             fade(SCREEN_WIDTH, SCREEN_HEIGHT)
             level.reset()
             reset_buttons()
+            clear_images()
             state = 0
 
         if state == 4:
@@ -93,6 +116,26 @@ def main(state, game_score, running):
                     if game_score > 50000:
                         game_score = 50000
                 state = 3
+
+        if state == 5:
+            if bomb_button.draw():
+                edit_num = 0
+            if one_button.draw():
+                edit_num = 1
+            if two_button.draw():
+                edit_num = 2
+            if three_button.draw():
+                edit_num = 3
+            if bomb_button_full.draw():
+                edit_num = 4
+            draw_grid()
+            update_edit_images(level, edit_num)
+            update_button_images(level)
+            draw_images(level)
+            draw_grid_text(level)
+            if edit_button.draw():
+                state = 1
+                edit_num = -1
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

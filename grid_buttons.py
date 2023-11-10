@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 from button import Button
-from draw_grid import draw_bomb_image, draw_one_image, draw_two_image, draw_three_image
+from draw_grid import draw_bomb_image, draw_one_image, draw_two_image, draw_three_image, draw_question_mark_image
 
 # grid buttons
 question_mark_img = pygame.transform.scale(question_mark_img, (TILE_WIDTH, TILE_HEIGHT))
@@ -43,7 +43,7 @@ class GridButton(pygame.sprite.Sprite):
         self.button_pressed = False
         self.x = x
         self.y = y
-        self.button = Button(x * TILE_WIDTH, y * TILE_HEIGHT, question_mark_img)
+        self.button = Button(self.x * TILE_WIDTH, self.y * TILE_HEIGHT, question_mark_img)
 
     def update(self, level):
         self.update_buttons(level)
@@ -52,13 +52,13 @@ class GridButton(pygame.sprite.Sprite):
     def update_images(self, level):
         if self.button_pressed:
             if level.grid[self.y][self.x] == 0:
-                draw_bomb_image(self.x * TILE_WIDTH, self.y * TILE_HEIGHT)
+                draw_bomb_image(self.x * TILE_WIDTH, self.y * TILE_HEIGHT, 1, bomb_image)
             elif level.grid[self.y][self.x] == 1:
-                draw_one_image(self.x * TILE_WIDTH, self.y * TILE_HEIGHT)
+                draw_one_image(self.x * TILE_WIDTH, self.y * TILE_HEIGHT, 1, num_one_image)
             elif level.grid[self.y][self.x] == 2:
-                draw_two_image(self.x * TILE_WIDTH, self.y * TILE_HEIGHT)
+                draw_two_image(self.x * TILE_WIDTH, self.y * TILE_HEIGHT, 1, num_two_image)
             elif level.grid[self.y][self.x] == 3:
-                draw_three_image(self.x * TILE_WIDTH, self.y * TILE_HEIGHT)
+                draw_three_image(self.x * TILE_WIDTH, self.y * TILE_HEIGHT, 1, num_three_image)
 
     def update_buttons(self, level):
         if self.button_pressed is False and self.button.draw():
