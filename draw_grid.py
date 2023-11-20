@@ -56,3 +56,26 @@ def draw_three_image(x, y, state, img):
 def draw_question_mark_image(x, y, img):
     pygame.transform.scale(img, (TILE_WIDTH, TILE_HEIGHT))
     SCREEN.blit(img, (x, y))
+
+
+def draw_hitbox(num):
+    if num == 0:
+        pygame.draw.rect(SCREEN, 'red',
+                         (SCREEN_WIDTH, TILE_HEIGHT * 3,
+                          TILE_WIDTH//2, TILE_HEIGHT//2), 1)
+    if num == 1:
+        pygame.draw.rect(SCREEN, 'blue',
+                         (SCREEN_WIDTH + TILE_WIDTH//2, TILE_HEIGHT * 3,
+                          TILE_WIDTH//2, TILE_HEIGHT//2), 1)
+    if num == 2:
+        pygame.draw.rect(SCREEN, 'blue',
+                         (SCREEN_WIDTH, TILE_HEIGHT * 3 + TILE_HEIGHT // 2,
+                          TILE_WIDTH//2, TILE_HEIGHT//2), 1)
+    if num == 3:
+        pygame.draw.rect(SCREEN, 'blue',
+                         (SCREEN_WIDTH + TILE_WIDTH // 2, TILE_HEIGHT * 3 + TILE_HEIGHT//2,
+                          TILE_WIDTH//2, TILE_HEIGHT//2), 1)
+    if num == 4:
+        pygame.draw.rect(SCREEN, 'red',
+                         (SCREEN_WIDTH, SCREEN_HEIGHT - TILE_HEIGHT * 2,
+                          TILE_WIDTH, TILE_HEIGHT), 1)

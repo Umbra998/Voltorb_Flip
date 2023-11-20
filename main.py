@@ -3,11 +3,11 @@ import random
 import pygame
 from settings import *
 from level import Level
-from draw_grid import draw_grid
+from draw_grid import draw_grid, draw_hitbox
 from button import Button
 from text import draw_text
 from grid_buttons import create_buttons, update_buttons, reveal_buttons, reset_buttons, update_button_images
-from edit_images import create_edits, update_edit_images, draw_images, clear_images
+from edit_images import create_edits, update_edit_images, draw_images, clear_images, edit_image_buttons_draw
 from fade import fade
 from display_text import draw_grid_text, draw_level_text, draw_score_text
 pygame.init()
@@ -24,21 +24,6 @@ continue_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//2,
                          continue_image)
 edit_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//3,
                      edit_image)
-img = pygame.transform.scale(bomb_image, (TILE_WIDTH//2, TILE_HEIGHT//2))
-bomb_button = Button(SCREEN_WIDTH, TILE_HEIGHT * 3,
-                     img)
-img = pygame.transform.scale(bomb_image, (TILE_WIDTH, TILE_HEIGHT))
-bomb_button_full = Button(SCREEN_WIDTH, SCREEN_HEIGHT - TILE_HEIGHT * 2,
-                          img)
-img = pygame.transform.scale(num_one_image, (TILE_WIDTH//2, TILE_HEIGHT//2))
-one_button = Button(SCREEN_WIDTH + TILE_WIDTH//2, TILE_HEIGHT * 3,
-                    img)
-img = pygame.transform.scale(num_two_image, (TILE_WIDTH//2, TILE_HEIGHT//2))
-two_button = Button(SCREEN_WIDTH, TILE_HEIGHT * 3 + TILE_HEIGHT // 2,
-                    img)
-img = pygame.transform.scale(num_three_image, (TILE_WIDTH//2, TILE_HEIGHT//2))
-three_button = Button(SCREEN_WIDTH + TILE_WIDTH // 2, TILE_HEIGHT * 3 + TILE_HEIGHT//2,
-                      img)
 
 
 # main loop
@@ -58,6 +43,7 @@ def main(state, game_score, running):
             draw_images(level)
             draw_grid_text(level)
             game_completion = level.check_for_clear()
+            clear_images(level, 2)
             if game_completion == 0:
                 state = 2
             if game_completion == 1:
@@ -95,7 +81,7 @@ def main(state, game_score, running):
             fade(SCREEN_WIDTH, SCREEN_HEIGHT)
             level.reset()
             reset_buttons()
-            clear_images()
+            clear_images(level, 1)
             state = 0
 
         if state == 4:
@@ -118,16 +104,8 @@ def main(state, game_score, running):
                 state = 3
 
         if state == 5:
-            if bomb_button.draw():
-                edit_num = 0
-            if one_button.draw():
-                edit_num = 1
-            if two_button.draw():
-                edit_num = 2
-            if three_button.draw():
-                edit_num = 3
-            if bomb_button_full.draw():
-                edit_num = 4
+            edit_num = edit_image_buttons_draw(edit_num)
+            draw_hitbox(edit_num)
             draw_grid()
             update_edit_images(level, edit_num)
             update_button_images(level)

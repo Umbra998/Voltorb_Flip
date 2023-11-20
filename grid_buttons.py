@@ -66,6 +66,8 @@ class GridButton(pygame.sprite.Sprite):
             level.score *= level.grid[self.y][self.x]
             if level.grid[self.y][self.x] == 0:
                 level.grid_found[self.y][self.x] = 0
+            elif level.grid[self.y][self.x] == 1:
+                level.grid_found[self.y][self.x] = 2
             elif level.grid[self.y][self.x] == 2 or level.grid[self.y][self.x] == 3:
                 level.grid_found[self.y][self.x] = 1
 
