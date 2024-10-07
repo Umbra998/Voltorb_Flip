@@ -9,11 +9,11 @@ def draw_grid_text(self):
             draw_text(f"Bombs: {self.grid_column[grid_row][0]}", FONT_GAME_STATUS, 'red',
                       TILE_WIDTH * 5 + TILE_WIDTH // 8, TILE_HEIGHT * grid_row + TILE_HEIGHT // 5)
             draw_text(f"Total: {self.grid_column[grid_row][1]}", FONT_GAME_STATUS, 'green',
-                      TILE_WIDTH * 5 + TILE_WIDTH // 5, TILE_HEIGHT * grid_row + TILE_HEIGHT // 1.5)
+                      TILE_WIDTH * 5 + TILE_WIDTH // 8, TILE_HEIGHT * grid_row + TILE_HEIGHT // 1.5)
             draw_text(f"Bombs: {self.grid_row[grid_column][0]}", FONT_GAME_STATUS, 'red',
                       TILE_WIDTH * grid_column + TILE_WIDTH // 8, TILE_HEIGHT * 5 + TILE_HEIGHT // 5)
             draw_text(f"Total: {self.grid_row[grid_column][1]}", FONT_GAME_STATUS, 'green',
-                      TILE_WIDTH * grid_column + TILE_WIDTH // 5, TILE_HEIGHT * 5 + TILE_HEIGHT // 1.5)
+                      TILE_WIDTH * grid_column + TILE_WIDTH // 8, TILE_HEIGHT * 5 + TILE_HEIGHT // 1.5)
     draw_text("Score:", FONT_GAME_STATUS, 'orange',
               TILE_WIDTH * 5 + MARGIN // 4, TILE_HEIGHT * 5 + TILE_HEIGHT // 5)
     draw_text(f"{self.score}", FONT_SCORE, 'orange',

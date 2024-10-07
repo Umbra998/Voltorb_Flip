@@ -12,9 +12,6 @@ from fade import fade
 from display_text import draw_grid_text, draw_level_text, draw_score_text
 pygame.init()
 
-# init level and grid
-level = Level(1)
-
 # button
 start_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//2,
                       start_image)
@@ -28,6 +25,8 @@ edit_button = Button(SCREEN_WIDTH, SCREEN_HEIGHT//3,
 
 # main loop
 def main(state, game_score, running):
+    # init level and grid
+    level = Level(1)
     no_failure_in_row = 0
     edit_num = -1
     create_buttons()

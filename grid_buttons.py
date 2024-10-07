@@ -4,7 +4,7 @@ from button import Button
 from draw_grid import draw_bomb_image, draw_one_image, draw_two_image, draw_three_image, draw_question_mark_image
 
 # grid buttons
-question_mark_img = pygame.transform.scale(question_mark_img, (TILE_WIDTH, TILE_HEIGHT))
+question_mark_img_big = pygame.transform.scale(question_mark_img, (TILE_WIDTH, TILE_HEIGHT))
 
 # create button group
 button_group = pygame.sprite.Group()
