@@ -28,8 +28,8 @@ To play the game, you’ll need to have Python and pygame installed on your syst
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/flip-puzzle-game.git
-    cd flip-puzzle-game
+    git clone https://github.com/Umbra998/Bombsweeper.git
+    cd Bombsweeper
     ```
 
 2. Install the required dependencies:
