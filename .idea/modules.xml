@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../VoltorbFlip/.idea/Voltorb Flip.iml" filepath="$PROJECT_DIR$/../VoltorbFlip/.idea/Voltorb Flip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Bombsweeper/.idea/Bombsweeper.iml" filepath="$PROJECT_DIR$/../Bombsweeper/.idea/Bombsweeper.iml" />
     </modules>
   </component>
 </project>
