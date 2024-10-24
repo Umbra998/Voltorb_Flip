@@ -28,7 +28,7 @@ To play the game, you’ll need to have Python and pygame installed on your syst
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/Umbra998/Bombsweeper.git
+    git clone https://github.com/linusheimbs/Bombsweeper.git
     cd Bombsweeper
     ```
 
